@@ -25,7 +25,33 @@ const { DataTypes } = require('sequelize');
 // Nombre
 
 
-// [ 'Action', 'Indie', 'Adventure', 'RPG', 'Strategy', 'Shooter', 'Casual', 'Simulation', 'Puzzle', 'Arcade', 'Platformer', 'Racing', 'Massively Multiplayer', 'Sports', 'Fighting', 'Family', 'Board Games', 'Educational', 'Card' ]
+// [ 'action', 'indie', 'adventure', 'role-playing-games-rpg', 'strategy', 'shooter', 'casual', 'simulation', 'puzzle', 'arcade', 'platformer', 'racing', 'massively-multiplayer', 'sports', 'fighting', 'family', 'board-games', 'educational', 'card' ]
+// [ 4, 51, 3, 5, 10, 2, 40, 14, 7, 11, 83, 1, 59, 15, 6, 19, 28, 34, 17 ]
+
+
+// const Genr = (sequelize) => {
+//   // defino el modelo
+
+//   sequelize.define('genres', {
+//     name: { 
+      
+//       type: DataTypes.STRING,
+//       allowNull: false
+//   },
+//   id: { 
+//       type: DataTypes.INTEGER,
+//       allowNull: false,
+//       primaryKey: true
+//   }
+//   });
+  
+// }
+
+
+
+
+
+// module.exports = Genr;
 
 module.exports = (sequelize) => {
   // defino el modelo
@@ -35,10 +61,13 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   });
+
+  
 };
