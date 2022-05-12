@@ -2,7 +2,7 @@ const { Router } = require('express');
 const morgan = require('morgan');
 const { videogame } = require('../models/Videogame.js')
 const { conn , Videogame , Genres } = require('../db.js')
-const { Op } = require('sequelize');
+const { Op, UUID } = require('sequelize');
 const axios = require('axios');
 const Genr = require('../models/Genres.js');
 const {
@@ -124,18 +124,64 @@ router.get('/search', async (req,res)=>{
   try {
       var searchJuegos = []
       // https://api.rawg.io/api/games?key=30ec9411e72d4d5c939a3dbf95b9fa21&page=2&search=age
-      // let searchGame = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${game}`);
-      // let results = searchGame.data.results;
-      // searchJuegos = searchJuegos.concat(results)
+      let searchGame = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${game}`);
+      let results = searchGame.data.results;
+      searchJuegos = searchJuegos.concat(results)
      
     
     const creategame = await Videogame.findAll({
       where:{
         name: {[Op.substring]:`%${game.toLocaleLowerCase()}`},
+        include: [{
+          model: Genres,
+          as: 'genres',
+          attributes: ['id', 'name']
+      }]
       }
     })
     searchJuegos = searchJuegos.concat(creategame)
     res.json(searchJuegos);
+  } catch (error) {
+    res.status(400).json({error:error})
+    
+  }
+  
+    
+})
+
+router.get('/videogame/', async (req,res)=>{
+  const { id } = req.query
+  try {
+    if(id.includes("-")){
+      const creategame = await Videogame.findByPk(id,{
+        where:{
+          include: [{
+            model: Genres,
+            as: 'genres',
+            attributes: ['id', 'name']
+        }]
+        }      
+      })
+      res.json(creategame);
+    }else{
+      const searchGameId = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);
+      res.json(searchGameId.data);
+    }
+    
+    
+    
+      // if(searchGameId.name){
+      //   res.json(searchGameId);
+      // }else{
+      //   const creategame = await Videogame.findOne({
+      //     where:{
+      //       id: id,
+      //     }
+      //   })
+    
+      // }
+      
+
   } catch (error) {
     res.status(400).json({error:error})
     
