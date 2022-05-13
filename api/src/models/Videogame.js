@@ -50,11 +50,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATEONLY,
       defaultValue: DataTypes.NOW,
     },
-    background_image: {
+    image: {
       type: DataTypes.TEXT
     },    
     rating:{
-      type: DataTypes.DECIMAL,
+      type: DataTypes.INTEGER,
       validate: {
         min:0,
         max: 5,

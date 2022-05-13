@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const morgan = require('morgan');
 const { videogame } = require('../models/Videogame.js')
-const { conn , Videogame , Genres } = require('../db.js')
+const { Videogame , Genres, Platforms } = require('../db.js')
 const { Op, UUID } = require('sequelize');
 const axios = require('axios');
-const Genr = require('../models/Genres.js');
+// const Platforms = require('../models/Platforms.js');
+// const Genr = require('../models/Genres.js');
+// const Platforms = require('../models/Platforms.js');
 const {
   API_KEY,
 } = process.env;
@@ -17,11 +19,13 @@ const {
 
 const router = Router();
 
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
 router.post('/creategame', async function(req, res){
-    const {name, description, released, rating, platforms, background_image, genres} = req.body
+    const {name, description, released, rating, platforms, image, genres} = req.body
     try {
         const newGame = await Videogame.create({
             name,
@@ -29,7 +33,7 @@ router.post('/creategame', async function(req, res){
             released, 
             rating, 
             platforms,
-            background_image,
+            image,
         })
         genres.forEach(async (g) => {
           let genre = await Genres.findOne({
@@ -38,6 +42,14 @@ router.post('/creategame', async function(req, res){
             }
           })
           newGame.addGenres(genre)
+        });
+        platforms.forEach(async (p) => {
+          let plat = await Platforms.findOne({
+            where: {
+              name: p
+            }
+          })
+          newGame.addPlatforms(plat)
         });
         res.status(201).json(newGame)
       } catch (error) {
@@ -57,6 +69,18 @@ router.post('/creategame', async function(req, res){
 
         })
         res.status(201).json(newGenres)
+      } catch (error) {
+        res.status(400).json({error:error})
+      }
+    
+    
+  })
+
+  router.post('/platforms', async function(req, res){
+    
+      try {
+          const newPlatforms = await Platforms.bulkCreate(req.body)
+        res.status(201).json(newPlatforms)
       } catch (error) {
         res.status(400).json({error:error})
       }
@@ -88,13 +112,12 @@ router.get('/', async (req,res)=>{
     }
     let filterCharacters = juegosApi.map((x) => {
       return {
-        id: x.id, //uuidv4()
+        id: x.id, 
         name: x.name,
         released: x.released,
         image: x.background_image,
         rating: x.rating,
         description: x.slug,
-        // Ingenioso esto no?
         genres: x.genres.map((z) => z),
         platforms: x.platforms.map((z) => z.platform.slug)
         
