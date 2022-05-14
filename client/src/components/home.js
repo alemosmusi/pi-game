@@ -4,30 +4,41 @@ import './sideBar.css';
 import Games from "./Games";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { obtenerGames } from "../redux/actions/gamesAction";
+import Loading from "./Loading";
 
 
 export function Home(){
 
     const allGames = useSelector((state) => state.arrayGames)
-    const [isLOading, setIsLOading] = useState(true)
 
 
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(obtenerGames())
-                   
+        dispatch(obtenerGames())      
       
       }, [])
     
     
+      
+    
+    
     
     const [pagina, setPagina] = useState(0)
-    
-
+    const [search, setSearch] = useState("")
+    const [cant, setCant] = useState(0)
+  
     const filterGames = () =>{
-        return allGames.slice(pagina, pagina + 15)
+        if (search.length === 0){
+            return allGames.slice(pagina, pagina + 15)
+        }else{
+            const filtered = allGames.filter(game => game.name.toLowerCase().includes(search))
+            return filtered.slice(pagina, pagina + 15)
+
+        }
+        
 
     }
+
 
     const nextPage = () => {
         setPagina(pagina + 15)
@@ -37,8 +48,12 @@ export function Home(){
         if (pagina >= 15){
         setPagina(pagina - 15)}
     }
-
-
+    
+    const onSearchChange = ({target}) => {
+        setPagina(0);
+        setSearch( target.value );
+    }
+   
     return (
         
         <>
@@ -48,18 +63,27 @@ export function Home(){
             </div>
             <ul>
                 <li>BUSCAR</li>
+                <input 
+                placeholder="Buscar Juego"
+                value={search}
+                onChange={onSearchChange}
+                />
                 <li>FILTRAR</li>
                 <li>ORDENAR</li>
             </ul>
         
         </div>
+        
         <div>
-            <Games games={filterGames()}></Games>
+
+            {allGames && allGames.length>1? <Games games={filterGames()}></Games>:<Loading></Loading> }
+            {/* <Games games={filterGames()}></Games> */}
         </div>
         <div>
             {pagina >= 15 ? <button onClick={prevPage}>ATRAS</button> : ""}
-            {pagina + 15 < allGames.length ? <button onClick={nextPage}>ADELANTE</button> : ""}
+            {14 < filterGames().length ? <button onClick={nextPage}>ADELANTE</button> : ""}
         </div>
+        
         </>
     )
 }

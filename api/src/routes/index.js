@@ -177,13 +177,19 @@ router.get('/videogame/', async (req,res)=>{
   try {
     if(id.includes("-")){
       const creategame = await Videogame.findByPk(id,{
-        where:{
+        
           include: [{
             model: Genres,
             as: 'genres',
             attributes: ['id', 'name']
-        }]
-        }      
+        },
+        {
+          model: Platforms,
+          as: 'Platforms',
+          attributes: ['id', 'name']
+      }
+      ]
+              
       })
       res.json(creategame);
     }else{

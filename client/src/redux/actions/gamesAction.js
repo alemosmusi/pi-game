@@ -4054,16 +4054,22 @@ const gamedetail = {
 
 
 export function obtenerDetalle(id){
-    fetch('http://localhost:3001/videogame/')
-        .then((resp) => resp.json())
-        .then((gamedetail) =>{
-            return {
-                type: OBTENER_DETALLE,
-                payload: gamedetail
+
+
+
+    return function(dispacth){
+        return fetch(`http://localhost:3001/videogame/?id=${id}`)
+            .then((resp) => resp.json())
         
-            }
-        })
+            .then((gamedetail) =>{
+                dispacth({
+                    type: OBTENER_DETALLE,
+                    payload: gamedetail
+            })
+    })
+    }
     
+           
 
 }
 
