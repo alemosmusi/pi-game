@@ -1,3 +1,4 @@
 export const OBTENER_GAMES = 'OBTENER_GAMES';
 export const ELIMINAR_UN_GAME = 'ELIMINAR_UN_GAME';
 export const OBTENER_DETALLE = 'OBTENER_DETALLE';
+export const CREATE_GAME = 'CREATE_GAME'

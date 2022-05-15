@@ -1,4 +1,4 @@
-import { ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-types/actionTypes"
+import { CREATE_GAME, ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-types/actionTypes"
 
 
 
@@ -8,7 +8,8 @@ import { ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-type
 
 const initialState = {
     arrayGames: [],
-    gameDetail: []
+    gameDetail: [],
+    gameCreated: {}
 
 }
 
@@ -28,6 +29,13 @@ const gameReducer = (state = initialState, action) => {
             return{
                 ...state,
                 gameDetail: action.payload
+            }
+
+        case CREATE_GAME:
+            return{
+                ...state,
+                gameCreated: action.payload
+
             }
         
         case ELIMINAR_UN_GAME:

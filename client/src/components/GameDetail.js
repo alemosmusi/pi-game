@@ -3,6 +3,7 @@ import './GameDetail.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { obtenerDetalle } from '../redux/actions/gamesAction';
+import Loading from './Loading';
 
 
 
@@ -23,6 +24,7 @@ export default function GamesDetail() {
       var genres = ""
       var imagen = ""
       if(gameDetail.slug){
+          imagen = gameDetail.background_image
         for (let index = 0; index < gameDetail.platforms.length; index++) {
                         plataformas = plataformas + " // " + gameDetail.platforms[index].platform.name + " //";
                     }
@@ -49,24 +51,37 @@ export default function GamesDetail() {
     return(
         
         <>
-        <h1>nombre</h1>
+
+        {gameDetail.name && gameDetail.name ? <h1>nombre</h1> :<Loading></Loading> }
+        
+        {/* <h1>nombre</h1> */}
         <div>{gameDetail.name}</div>
         <br></br>
-        <h1>detalle</h1>
+        {/* <h1>detalle</h1> */}
         <div>{gameDetail.description}</div>
         <br></br>
-        <h1>rating</h1>
+        {/* <h1>rating</h1> */}
         <div>{gameDetail.rating}</div>
         <br></br>
-        <h1>lanzamiento</h1>
+        {/* <h1>lanzamiento</h1> */}
         <div>{gameDetail.released}</div>
         <br></br>
-        <h1>plataforma</h1>
+        {/* <h1>plataforma</h1> */}
         <div>{plataformas}</div>
         <br></br>
-        <h1>generos</h1>
+        {/* <h1>generos</h1> */}
         <div>{genres}</div>
         <img src={imagen} alt=''></img>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         </>
 

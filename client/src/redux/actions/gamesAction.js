@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-types/actionTypes";
+import { CREATE_GAME, ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-types/actionTypes";
+import axios from 'axios';
 
 
 
@@ -4079,4 +4080,28 @@ export function eliminarGame(id){
         type: ELIMINAR_UN_GAME,
         payload: id
     }
+}
+
+
+
+
+
+
+
+export function createGame(game){
+
+  
+        return function(dispatch){
+            return axios.post('http://localhost:3001/creategame', game)
+            .then((response) => {
+                dispatch({
+                    type: CREATE_GAME,
+                    payload: response.data
+                })
+            })
+        }
+    
+
+           
+
 }

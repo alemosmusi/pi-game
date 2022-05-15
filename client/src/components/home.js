@@ -25,7 +25,6 @@ export function Home(){
     
     const [pagina, setPagina] = useState(0)
     const [search, setSearch] = useState("")
-    const [cant, setCant] = useState(0)
   
     const filterGames = () =>{
         if (search.length === 0){

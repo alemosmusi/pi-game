@@ -4,6 +4,7 @@ import './App.css';
 import NavBar from './components/navBar';
 import {Home} from './components/home';
 import GamesDetail from './components/GameDetail';
+import { CreateGame } from './components/CreateGame';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
       <Route exact path='/game/:id'>
         <GamesDetail></GamesDetail>
       </Route>
+      <Route exact path='/creategame'>
+        <CreateGame></CreateGame>
+      </Route>
+      
 
   </div>
     
