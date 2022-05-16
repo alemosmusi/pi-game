@@ -3,6 +3,7 @@ import './Games.css';
 import Game from './Game';
 import { connect } from "react-redux";
 import { obtenerGames } from '../redux/actions/gamesAction';
+import './contenedor.css'
 
 
 
@@ -15,7 +16,7 @@ export default function Games({games}) {
     
     
   return (
-    <div className='cards'>
+    <div className='cards' >
       {games.map(c => <Game
           key={c.id}
           id={c.id}

@@ -1,15 +1,11 @@
 
 
-* {
-    margin: 0px;
-    padding: 0px;
-  }
   
   #sidebar {
     position: fixed;
     width: 200px;
     height: 100%;
-    background: #151719;
+    background: #272f61;
     /* left: -200px;
     transition: all 500ms linear; */
   }
@@ -22,27 +18,43 @@
     color: rgba(230, 230, 230, .9);
     list-style: none;
     padding: 15px 10px;
-    border-bottom: 1px solid rgba(100, 100, 100, .3);
+    text-align: center;
+  }
+
+
+  #sidebar ul input {
+    list-style: none;
+    padding: 7px 10px;
     text-align: center;
   }
   
-  .logo {
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto; 
-  }
+  .lcheck{
+    list-style: none;
+    display: inline-block;
   
-  #sidebar .toggle-btn {
-    position: absolute;
-    left: 230px;
-    top: 20px;
-    cursor: pointer;
   }
+
+  .ccheck{
+    list-style: none;
+    display: inline-block;
+  }
+
+
+  .btns{
   
-  #sidebar .toggle-btn span {
-    display: block;
-    width: 40px;
-    text-align: center;
-    font-size: 30px;
-    border: 3px solid #000;
+    list-style: none;
+    display: inline-block;
+    margin: 5px;
+    width: 45%;
+    border-radius: 5px;
+    
+      }
+
+  .btns:hover{
+    background-color: rgb(148, 160, 188);
+    border-top: 3px solid rgb(14, 31, 39);;
+    border-left: 3px solid rgb(14, 31, 39);;
+    border-bottom: 3px solid rgb(39, 85, 108);
+    border-right: 3px solid rgb(39, 85, 108);
   }
+

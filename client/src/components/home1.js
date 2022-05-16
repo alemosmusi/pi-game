@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import './sideBar.css';
-import './contenedor.css'
 import Games from "./Games";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { obtenerGames } from "../redux/actions/gamesAction";
@@ -12,40 +11,42 @@ import filtrarG from "./funciones/filtrarG";
 
 export function Home(){
 
-    const allGames = useSelector((state) => state.arrayGames)
-    const [allG, setallG] = useState(allGames)
-    const [pagina, setPagina] = useState(0)
-    const [search, setSearch] = useState("")
-    const [AZ, setAZ] = useState("A-Z")
-    const [RATINGAS, setRATINGAS] = useState("RATING-↧")
+    var allGames = useSelector((state) => state.arrayGames)
+
+    
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(obtenerGames())      
       
       }, [])
     
-    const filterGames = () =>{
-        
-        var filtered = allGames
-        
-
-        if (search.length > 0){
-         filtered = filtered.filter(game => game.name.toLowerCase().includes(search))}
-         if(envG.length > 0){ filtered = filtrarG(filtered,envG)}
-         
-        return filtered.slice(pagina, pagina + 15)
-        
-       
-    }
-    useEffect(() => {
-      
-    //   setallG(allGames)
-    filterGames()
-      
-    }, [allGames,allG,search])
-
-      
     
+      
+    useEffect(() => {
+        return filterGames()
+    }, [SortAZ])
+    
+    
+    
+    const [pagina, setPagina] = useState(0)
+    const [search, setSearch] = useState("")
+    const [AZ, setAZ] = useState("A-Z")
+    const [RATINGAS, setRATINGAS] = useState("RATING-↧")
+   
+    const filterGames = () =>{
+        if(envG.length > 0){ allGames = filtrarG(allGames,envG)} 
+        if (search.length === 0){
+            return allGames.slice(pagina, pagina + 15)
+        }else{
+            
+            const filtered = allGames.filter(game => game.name.toLowerCase().includes(search))
+            return filtered.slice(pagina, pagina + 15)
+
+        }
+        
+
+    }
+
 
     const nextPage = () => {
         setPagina(pagina + 15)
@@ -55,15 +56,10 @@ export function Home(){
         if (pagina >= 15){
         setPagina(pagina - 15)}
     }
-
     
     const onSearchChange = ({target}) => {
-        if(allG.length === 0){
-            setallG(allGames)
-        }
         setPagina(0);
         setSearch( target.value );
-        
     }
     
     const ordenarAZ = () => {
@@ -116,129 +112,143 @@ export function Home(){
 
 
     const [searchg, setsearchg] = useState("")
-    const [genero, setGenero] = useState([])
+const [genero, setGenero] = useState([])
+
+const filtergenress = () =>{ //filtra lo que voy buscando
+  
+  if (searchg.length > 0){
     
-    const filtergenress = () =>{ //filtra lo que voy buscando
-      
-      if (searchg.length > 0){
-        
-          const filteredg = listaGeneros.filter(g => g.toLowerCase().includes(searchg))
-          return filteredg
-      }else{
-          return []
-      }
-    }
-    useEffect(() => {
-      setGenero(filtergenress())
-      
-    }, [searchg])
+      const filteredg = listaGeneros.filter(g => g.toLowerCase().includes(searchg))
+      return filteredg
+  }else{
+      return []
+  }
+}
+useEffect(() => {
+  setGenero(filtergenress())
+  
+}, [searchg])
+
+
+const onSearchGenre = ({target}) => { //busca los generos
+    setsearchg( target.value );
+
     
-    
-    const onSearchGenre = ({target}) => { //busca los generos
-        setsearchg( target.value );
-    
-        
-    }
-    
-    const palomita = (c) => { //para ver si tiene o no palomita cuando mapea
-      if(def[c]){
-        return true
-      }else{
-        return ""
-      }
-      
-    }
-    
-    
-    const [envG, setenvG] = useState([])
-    const [def, setdef] = useState([])
-      const handleInputCheckG = function(e){
-          setdef({
-              
-              ...def, [e.target.name]: e.target.checked
-              
-          })
-             
-      }
-    
-    useEffect(() => {
-      senG()
-    }, [def])
-    
-     
-      const senG = ()=>{ //filtra los que tienen palomita true
-        var a = Object.keys(def).map((dd) => def[dd]? dd: null).filter(a => a !== null)
-        setenvG(a)
-      }
-    
-      
-    
-    
-    //   useEffect(() => {
-    //     filterGames()
-    // }, [ordenarAZ])
-    
+}
+
+const palomita = (c) => { //para ver si tiene o no palomita cuando mapea
+  if(def[c]){
+    return true
+  }else{
+    return ""
+  }
+  
+}
 
 
+const [envG, setenvG] = useState([])
+const [def, setdef] = useState([])
+  const handleInputCheckG = function(e){
+      setdef({
+          
+          ...def, [e.target.name]: e.target.checked
+          
+      })
+         
+  }
 
+useEffect(() => {
+  senG()
+}, [def])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+  const senG = ()=>{ //filtra los que tienen palomita true
+    var a = Object.keys(def).map((dd) => def[dd]? dd: null).filter(a => a !== null)
+    setenvG(a)
+  }
 
   
+
+
+  useEffect(() => {
+    filterGames()
+}, [ordenarAZ])
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
    
     return (
         
-        <div >
+        <>
         <div id="sidebar">
-            {/* <div className="btn">
+            <div className="btn">
                 <span>&#9776;</span>
-            </div> */}
+            </div>
             <ul>
                 <li>BUSCAR</li>
                 <input 
                 placeholder="Buscar Juego"
                 value={search}
                 onChange={onSearchChange}
-                name= "buscar"
                 />
                 <li>FILTRAR</li>
                 <input placeholder="generos" value={searchg} onChange={onSearchGenre}/>
-                {genero.map((c) => (<ul className="lcheck" key={c+"a"}><li className="ccheck" key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
+                {genero.map((c) => (<ul key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
                 <li>ORDENAR</li>
-                <button className="btns" onClick={ordenarAZ}>{AZ}</button>
-                <button className="btns" onClick={ordenarRATING}>{RATINGAS}</button>
+                <button onClick={ordenarAZ}>{AZ}</button>
+                <button onClick={ordenarRATING}>{RATINGAS}</button>
             </ul>
         
         </div>
+        
         <div>
-        <div className="contenedor">
 
-            {allGames && allGames.length>1 || allG.length>1? <Games games={filterGames()}></Games>:<Loading></Loading> }
+            {allGames && allGames.length>1? <Games games={filterGames()}></Games>:<Loading></Loading> }
             {/* <Games games={filterGames()}></Games> */}
         </div>
         <div>
             {pagina >= 15 ? <button onClick={prevPage}>ATRAS</button> : ""}
             {14 < filterGames().length ? <button onClick={nextPage}>ADELANTE</button> : ""}
         </div>
-
-        </div>
         
-        </div>
+        </>
     )
 }
 
 
+
+
+
+// function mapStateToProps(state) { // recibe el estado global de redux
+//     return { // objeto que transforma estado global en props para el componente
+//       games: state.arrayGames // array con todas las peliculas
+//     };
+//   }
+//   function mapDispatchToProps(dispacth){
+//     return {
+//       obtenerGames: dispacth(obtenerGames())
+//     }
+//   }
+  
+  
+//   export default connect(mapStateToProps, mapDispatchToProps)(Games);

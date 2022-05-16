@@ -1,27 +1,56 @@
-.navv {
-    background-color: green;
+* {
+    margin: 0;
+    padding: 0;
 }
-.azul {
-    background-color: blue;
-    border:solid 4px black;
-    display:inline-block;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+
+/* .container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(5, 10, 5, 0.80), rgba(90, 40, 90, 0.80)), url(./bg-image.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
+.navbar {
+    background-color: rgb(1, 12, 72);
+    width: 100%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.amarillo {
-    background-color: yellow;
-    border:solid 4px black;
-    display:inline-block;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+
+
+
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+
 }
-.rojo {
-    background-color: red;
-    border:solid 4px black;
-    display:inline-block;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
+
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-family: Roboto, "verdana";
+    font-size: 1.2rem;
+}
+
+.navbar ul li::before {
+    content: "";
+    height: 3px;
+    width: 0%;
+    background: rgb(0, 255, 247);
+    position: absolute;
+    left: 0;
+    bottom: -12px;
+    transition: 0.4s ease-out;
+}
+
+.navbar ul li:hover::before {
+    width: 100%;
 }

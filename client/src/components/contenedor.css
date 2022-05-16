@@ -1,0 +1,7 @@
+.contenedor{
+    
+    background-color: green;
+    margin-left: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
