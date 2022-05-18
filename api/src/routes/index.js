@@ -142,6 +142,37 @@ router.get('/', async (req,res)=>{
     
 })
 
+
+
+
+router.get('/gamescreated', async (req,res)=>{
+  try {
+    
+    const creategame = await Videogame.findAll(
+      {
+        include: [{
+            model: Genres,
+            as: 'genres',
+            attributes: ['id', 'name']
+        }]
+    }
+    )
+    res.json(creategame);
+  } catch (error) {
+    res.status(400).json({error})
+    
+  }
+  
+    
+})
+
+
+
+
+
+
+
+
 router.get('/search', async (req,res)=>{
   const { game } = req.query
   try {
@@ -218,6 +249,23 @@ router.get('/videogame/', async (req,res)=>{
   
     
 })
+
+
+
+
+router.delete('/deletegame', async (req, res) => {
+  
+  const  {id}  = req.query;
+  try {
+    const elim = await Videogame.destroy({ where: { id: id } });
+    res.status(201).json(elim)
+  } catch (error) {
+    res.status(400).json({error:error})
+  }
+  
+});
+
+
 
 // https://api.rawg.io/api/games?search={game}
 

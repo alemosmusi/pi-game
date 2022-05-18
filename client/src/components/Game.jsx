@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './Game.css';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Estrella from './estrella';
+import { eliminarGame } from '../redux/actions/gamesAction';
 
-export default function Game ({id, name, image, rating, platforms, genres}) {
+
+export default function Game ({id, name, image, rating, platforms, genres,created}) {
+  const dispatch = useDispatch()
   var estrellas = []
   var rat = rating + ""
   for (let i = 0; i < rat[0]; i++) {
@@ -13,11 +16,9 @@ export default function Game ({id, name, image, rating, platforms, genres}) {
     
   }
   const estrell = function(){
-    console.log("pasaaaa")
     if(rat.slice(2) > 38 && rat.slice(2) < 63 ){
       return "estrella12.png"
     }else if(rat.slice(2) < 38){
-      console.log("pasaaaa")
       return "estrella14.png"
     }else{
       return "estrella34.png"
@@ -36,7 +37,31 @@ export default function Game ({id, name, image, rating, platforms, genres}) {
       
   //   }
   // }
+ 
+
+  const eliminar = function(){
+    dispatch(eliminarGame(id))
+    
+
+  }
   
+
+  if(created){
+    return(
+
+      <div className="game" >
+              <img className="image" src={image} alt="" />
+         
+          <Link  className="card-title" to={`/game/${id}`}>
+            {name}
+          </Link>
+          <button className="X" onClick={eliminar}>{created}</button>
+          <p className="rating">{estrellas.map(c => <Estrella key={c}/> )}{rat.slice(2) > 38 && rat.slice(2) < 63? <img className="ico" src="estrella12.png" alt="" />: rat.slice(2) < 38?<img className="ico" src="estrella14.png" alt="" />: <img className="ico" src="estrella34.png" alt="" />}</p>
+
+      </div>
+
+    )
+  }
 
     return (
       <Link className="game" to={`/game/${id}`}>
@@ -50,6 +75,7 @@ export default function Game ({id, name, image, rating, platforms, genres}) {
           <p  className="card-title">
             {name}
           </p>
+          <div className="X">{created}</div>
           <p className="rating">{estrellas.map(c => <Estrella key={c}/> )}{rat.slice(2) > 38 && rat.slice(2) < 63? <img className="ico" src="estrella12.png" alt="" />: rat.slice(2) < 38?<img className="ico" src="estrella14.png" alt="" />: <img className="ico" src="estrella34.png" alt="" />}</p>
 {/*           
           <div className="row">

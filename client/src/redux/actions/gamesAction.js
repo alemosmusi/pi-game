@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { CREATE_GAME, ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES } from "../action-types/actionTypes";
+import { CREATE_GAME, ELIMINAR_UN_GAME, OBTENER_DETALLE, OBTENER_GAMES, OBTENER_GAMES_CREATED } from "../action-types/actionTypes";
 import axios from 'axios';
 
 
@@ -4025,6 +4025,21 @@ export function obtenerGames(){
     
 }
 
+export function obtenerGamesCreated(){
+    return function(dispacth){
+        return fetch('http://localhost:3001/gamescreated')
+            .then((resp) => resp.json())
+        
+            .then((games) =>{
+                dispacth({
+                type: OBTENER_GAMES_CREATED,
+                payload: games
+            })
+    })
+    }
+    
+}
+
 
 const gamedetail = {
 
@@ -4076,10 +4091,17 @@ export function obtenerDetalle(id){
 
 
 export function eliminarGame(id){
-    return{
-        type: ELIMINAR_UN_GAME,
-        payload: id
+    return function(dispatch){
+        console.log(id)
+        return axios.delete(`http://localhost:3001/deletegame?id=${id}`)
+        .then((response) => {
+            dispatch({
+                type: ELIMINAR_UN_GAME,
+                payload: response.data
+            })
+        })
     }
+
 }
 
 

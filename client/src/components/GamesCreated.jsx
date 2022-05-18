@@ -4,15 +4,16 @@ import './sideBar.css';
 import './home.css';
 import Games from "./Games";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { obtenerGames } from "../redux/actions/gamesAction";
+import { obtenerGames, obtenerGamesCreated, eli } from "../redux/actions/gamesAction";
 import Loading from "./Loading";
 import { listaGeneros, listaPlataformas } from './datos';
 import filtrarG from "./funciones/filtrarG";
 
 
-export function Home(){
+export function GamesCreated(){
 
-    const allGames = useSelector((state) => state.arrayGames)
+    const allGames = useSelector((state) => state.aGamesCreated)
+    const eli = useSelector((state) => state.eli)
     const [allG, setallG] = useState(allGames)
     const [pagina, setPagina] = useState(0)
     const [search, setSearch] = useState("")
@@ -20,9 +21,14 @@ export function Home(){
     const [RATINGAS, setRATINGAS] = useState("RATING-↧")
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(obtenerGames())      
+        dispatch(obtenerGamesCreated())      
       
       }, [])
+
+      useEffect(() => {
+        dispatch(obtenerGamesCreated())      
+      
+      }, [eli])
     
     const filterGames = () =>{
         
@@ -185,13 +191,26 @@ export function Home(){
 
 
 
+    const XX = () =>{
+        
+        var X = "X"
+        
+
+        
+        return X
+        
+       
+    }
 
 
 
 
-
-    
-   
+    if(allGames === "vacia"){
+        return (
+            <img className="gameover" src="https://static3.thegamerimages.com/wordpress/wp-content/uploads/2020/09/Super-Mario-3D-World-Game-Over.jpg" alt="" />
+        )
+    }else{
+         
     return (
         
         <div className="home">
@@ -220,13 +239,8 @@ export function Home(){
             <div className="contenedor">
                 <div>
                     {
-                    allGames && allGames.length>1 || allG.length>1? <Games games={filterGames()}></Games>:
+                    allGames && allGames.length>=1 || allG.length>=1? <Games games={filterGames()} created={XX()}></Games>:
                     <Loading></Loading> 
-                    }
-                </div>
-                <div>
-                    {
-                    allGames.length>1 && filterGames().length === 0? <img className="gameover" src="https://static3.thegamerimages.com/wordpress/wp-content/uploads/2020/09/Super-Mario-3D-World-Game-Over.jpg" alt="" />: ""
                     }
                 </div>
                 <div>
@@ -239,6 +253,18 @@ export function Home(){
         
         </div>
     )
+
+
+    }
+
+
+
+
+
+  
+
+    
+  
 }
 
 

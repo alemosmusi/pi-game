@@ -246,6 +246,7 @@ const handleSubmit = (e)=>{
 
 
 
+
 const envi = {
   name: input.name,
   genres: envG,
@@ -267,6 +268,9 @@ const envi = {
 // }
 
 
+
+
+
 const asdf = input.rating
 
   const rotacion = ()=>{
@@ -285,16 +289,20 @@ const asdf = input.rating
     }, [asdf])
 
 
-console.log(envi)
+
 
 
 
 
 if(gameCreated.id){
   return(
-    <Link to={`/game/${gameCreated.id}`} >
-            <h5 className="card-title">se creo el juego {gameCreated.name} anda a verlo</h5>
+    
+      <Link to={`/game/${gameCreated.id}`} >
+            <button className="botoncreado">se creo el juego {gameCreated.name} anda a verlo</button>
     </Link>
+    
+    
+    
 
 
 

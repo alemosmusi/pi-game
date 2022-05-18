@@ -140,6 +140,23 @@ outline: none;
 
             }
 
+.botoncreado{
+    margin-top: 100px;
+    width: 50%;
+    height: 100px;
+    font-size: 20px;
+}
+
+
+.botoncreado:hover,
+.botoncreado:focus {
+    background: rgb(0, 255, 247);;
+    color: #fff;
+    transition: background-color 1s ease-out;
+    outline: 0;
+    cursor: pointer;
+}
+
 
 
 

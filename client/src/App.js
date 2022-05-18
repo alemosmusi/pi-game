@@ -5,6 +5,7 @@ import NavBar from './components/navBar';
 import {Home} from './components/home';
 import GamesDetail from './components/GameDetail';
 import { CreateGame } from './components/CreateGame';
+import { GamesCreated } from './components/GamesCreated';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
       </Route>
       <Route exact path='/creategame'>
         <CreateGame></CreateGame>
+      </Route>
+      <Route exact path='/gamescreated'>
+        <GamesCreated></GamesCreated>
       </Route>
       
 

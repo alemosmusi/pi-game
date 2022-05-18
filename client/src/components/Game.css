@@ -62,3 +62,25 @@
     height: 20%;;
 }
 
+.X{
+    font-family: Arial, Black, sans-serif;
+    background-color: red;
+    width: 20px;
+    border-radius: 20px;
+    position: absolute;
+    text-align: center;
+    font-size: 17px;
+    color: rgb(255, 255, 255);
+    font-display: center;
+    top: 10%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    text-shadow: 2px 2px rgb(14, 15, 36);
+    z-index: 1;
+    cursor: pointer;
+}
+.X:hover{
+
+    box-shadow: 13px 15px 37px black;
+}
+

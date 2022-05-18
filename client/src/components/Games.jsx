@@ -7,17 +7,16 @@ import './contenedor.css'
 
 
 
-export default function Games({games}) {
+export default function Games(a) {
 
     // useEffect(() => {
     //   obtenerGames()
     
     // }, [])
     
-    
   return (
     <div className='cards' >
-      {games.map(c => <Game
+      {a.games.map(c => <Game
           key={c.id}
           id={c.id}
           name={c.name}
@@ -25,6 +24,7 @@ export default function Games({games}) {
           rating={c.rating}
           platforms={c.platforms}
           genres={c.genres}
+          created={a.created}
 
         /> )}
     </div>
