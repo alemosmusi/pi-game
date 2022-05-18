@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import './sideBar.css';
-import './contenedor.css'
+import './home.css';
 import Games from "./Games";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { obtenerGames } from "../redux/actions/gamesAction";
@@ -202,40 +202,43 @@ export function Home(){
    
     return (
         
-        <div >
-        <div id="sidebar">
+        <div className="home">
+            <div id="sidebar">
             {/* <div className="btn">
                 <span>&#9776;</span>
             </div> */}
-            <ul>
-                <li>BUSCAR</li>
-                <input 
-                placeholder="Buscar Juego"
-                value={search}
-                onChange={onSearchChange}
-                name= "buscar"
-                />
-                <li>FILTRAR</li>
-                <input placeholder="generos" value={searchg} onChange={onSearchGenre}/>
-                {genero.map((c) => (<ul className="lcheck" key={c+"a"}><li className="ccheck" key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
-                <li>ORDENAR</li>
-                <button className="btns" onClick={ordenarAZ}>{AZ}</button>
-                <button className="btns" onClick={ordenarRATING}>{RATINGAS}</button>
-            </ul>
+                <ul>
+                    <li>BUSCAR</li>
+                    <input 
+                    placeholder="Buscar Juego"
+                    value={search}
+                    onChange={onSearchChange}
+                    name= "buscar"
+                    />
+                    <li>FILTRAR</li>
+                    <input placeholder="generos" value={searchg} onChange={onSearchGenre}/>
+                    {genero.map((c) => (<ul className="lcheck" key={c+"a"}><li className="ccheck" key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
+                    <li>ORDENAR</li>
+                    <button className="btns" onClick={ordenarAZ}>{AZ}</button>
+                    <button className="btns" onClick={ordenarRATING}>{RATINGAS}</button>
+                </ul>
         
-        </div>
-        <div>
-        <div className="contenedor">
+            </div>
+            
+            <div className="contenedor">
+                <div>
+                    {
+                    allGames && allGames.length>1 || allG.length>1? <Games games={filterGames()}></Games>:
+                    <Loading></Loading> 
+                    }
+                </div>
+                <div>
+                    {pagina >= 15 ? <button onClick={prevPage} className="btnsp">&lt;</button> : ""}
+                    {14 < filterGames().length ? <button onClick={nextPage} className="btnsp">&gt;</button> : ""}
+                </div>
+            </div>
 
-            {allGames && allGames.length>1 || allG.length>1? <Games games={filterGames()}></Games>:<Loading></Loading> }
-            {/* <Games games={filterGames()}></Games> */}
-        </div>
-        <div>
-            {pagina >= 15 ? <button onClick={prevPage}>ATRAS</button> : ""}
-            {14 < filterGames().length ? <button onClick={nextPage}>ADELANTE</button> : ""}
-        </div>
-
-        </div>
+            
         
         </div>
     )

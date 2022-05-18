@@ -1,0 +1,32 @@
+
+
+.cards{
+    background-color: rgb(163, 186, 254);
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+
+.btnsp{
+  
+    list-style: none;
+    display: inline-block;
+    margin: 5px;
+    font-size: 50px;
+    width: 70px;
+    border-radius: 100%;
+    
+      }
+
+  .btnsp:hover{
+    background-color: rgb(148, 160, 188);
+    border-top: 3px solid rgb(14, 31, 39);;
+    border-left: 3px solid rgb(14, 31, 39);;
+    border-bottom: 3px solid rgb(39, 85, 108);
+    border-right: 3px solid rgb(39, 85, 108);
+  }
+
+  .cargando{
+    width:80%
+  }

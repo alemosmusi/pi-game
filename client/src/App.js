@@ -13,9 +13,9 @@ function App() {
       <Route path='/'>
         <NavBar></NavBar>
       </Route>
-    </div>
+    </div >
       <Route exact path='/'>
-        <Home></Home>
+        <Home ></Home>
       </Route>
       <Route exact path='/game/:id'>
         <GamesDetail></GamesDetail>

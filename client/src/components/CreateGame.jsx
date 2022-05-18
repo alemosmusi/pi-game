@@ -31,7 +31,7 @@ export  function  CreateGame() {
 
   const gameCreated = useSelector((state) => state.gameCreated)
 
-  console.log(gameCreated)
+  
 
   const dispatch = useDispatch()
 
@@ -255,6 +255,7 @@ const envi = {
   image: input.image,
   description: input.description
 }
+
 //   {
 //     "name": "agdsafgdu",
 //     "description": "espsdgadfgadgaksfja", 
@@ -264,6 +265,31 @@ const envi = {
 //     "genres":["adventure", "role-playing-games-rpg", "strategy", "shooter"],
 //     "image": "https://i.blogs.es/c140f1/3446535-supermarioparty-review-thumbnologo/450_1000.jpeg"
 // }
+
+
+const asdf = input.rating
+
+  const rotacion = ()=>{
+    const rati = document.querySelector(".rati");
+      const eee = envi.rating/5
+      const aaa = envi.rating/2.5
+      rati.style.setProperty("--thumb-scale", `${1+aaa}`);
+      rati.style.setProperty("--thumb-rotate", `${eee * 720}deg`);
+      
+  }
+  
+  
+    useEffect(() => {
+      rotacion()
+    
+    }, [asdf])
+
+
+console.log(envi)
+
+
+
+
 if(gameCreated.id){
   return(
     <Link to={`/game/${gameCreated.id}`} >
@@ -275,80 +301,228 @@ if(gameCreated.id){
   )
 }else{
 
+
+
+
+
+
+  
+    
+     // tiene que dar uno
+    // rati.style.setProperty("--thumb-rotate", `${eee * 720}deg`);
+    // label.innerHTML = Math.round(value * 50);
+    // console.log(rati)
+ 
+
+
+  // const barra = document.querySelector("input");
+  // const labelb = document.querySelector("label");
+  // console.log(barra.addEventListener)
+  // input.addEventListener("input", event => {
+    // const eee = envi.rating/5;
+    // input.style.setProperty("--thumb-rotate", `${eee * 720}deg`);
+  //   label.innerHTML = Math.round(value * 50);
+  // });
+
+
+
+
+
+
+
+
+
   return (
     // pasar e.preventDefault()
-    <form onSubmit={handleSubmit}>
-      <div className='celdas'>
-        <h3>name:</h3>
-        <input className={errors.name && 'danger'} type="text" name="name" placeholder='name' onChange={handleInputChange} value={input.name} autoComplete="off"/>
-        {errors.name && (
-        <p className="danger">{errors.name}</p>
-      )}
+    <div className="content">
+
+      <h1 className="cree">CREE SU JUEGO</h1>
+
+      <div className="contact-form">
+
+       <form onSubmit={handleSubmit}>
+             <div>
+               <label>Name:</label>
+               <input className={errors.name && 'danger'} type="text" name="name" placeholder='Name' onChange={handleInputChange} value={input.name} autoComplete="off"/>
+               {errors.name && (
+               <p className="danger">{errors.name}</p>
+             )}
+             </div>
+
+             <div>
+               
+               <label>Genres:</label>
+               <input placeholder="Genres" value={searchg} onChange={onSearchGenre}/>
+               
+               {genero.map((c) => (<ul className="lcheck" key={c+"a"}><li  key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
+               {envi.genres.length === 0 && (
+               <p className="danger">es necesario un genero</p>
+             )}
+             </div>
+
+
+             <div>
+              
+                <label>Platforms:</label>
+                <input placeholder="Platforms" value={searchp} onChange={onSearchPlat}/>
+                
+               {plataforma.map((c) => (<ul className="lcheck" key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckP} defaultChecked={palomita2(c)}></input></ul>) )}
+               {envi.platforms.length === 0 && (
+               <p className="danger">es necesario una plataforma</p>
+             )}
+             </div>
+
+             <div>
+               <label>Rating:</label>
+               <input type="range" name='rating' min="0" max="5" onChange={handleInputChange} className="rati" step="0.01" defaultValue="0"></input>
+               {envi.rating === "" && (
+               <p className="danger">es necesario un rating</p>
+             )}
+             </div>
+
+             <div>
+               <label>Released:</label>
+               <input type="date" name = "released" onChange={handleInputChange} className="released"></input>
+               {envi.released === "" && (
+               <p className="danger">es necesario una fecha de lanzamiento</p>
+             )}
+             </div>
+
+             <div>
+               <label>Image:</label>
+               <input type="text" name="image" id="image" placeholder='image' onChange={handleInputChange} value={input.image}></input>
+               {errors.image && (
+               <p className="danger">{errors.image}</p>
+             )}
+             </div>
+
+
+             <div className='block'>
+               <label>Descripcion:</label>
+               <textarea type="text" name="description" id="description" placeholder='description' onChange={handleInputChange} value={input.description}></textarea>
+               {errors.description && (
+               <p className="danger">{errors.description}</p>
+             )}
+             </div>
+
+
+
+
+
+             {habilitar(envi,errors)?<input  type="submit" name ="submit" disabled = {!habilitar(envi,errors) } className="bbto"/>:""}
+         </form>
       </div>
+
+
+
+
+
+
+
+
+
+    </div>
+    
+  )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <form onSubmit={handleSubmit}>
+//       <div className='celdas'>
+//         <h3>name:</h3>
+//         <input className={errors.name && 'danger'} type="text" name="name" placeholder='name' onChange={handleInputChange} value={input.name} autoComplete="off"/>
+//         {errors.name && (
+//         <p className="danger">{errors.name}</p>
+//       )}
+//       </div>
       
-      <div className='celdas'>
-        <ul>
-          <h3>GENERO</h3>
-                <input placeholder="generos" value={searchg} onChange={onSearchGenre}/>
-          </ul>
-        {genero.map((c) => (<ul key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
-        {envi.genres.length === 0 && (
-        <p className="danger">es necesario un genero</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <ul>
+//           <h3>GENERO</h3>
+//                 <input placeholder="generos" value={searchg} onChange={onSearchGenre}/>
+//           </ul>
+//         {genero.map((c) => (<ul key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckG} defaultChecked={palomita(c)}></input></ul>) )}
+//         {envi.genres.length === 0 && (
+//         <p className="danger">es necesario un genero</p>
+//       )}
+//       </div>
       
 
-      <div className='celdas'>
-        <ul>
-          <h3>PLATAFORMAS</h3>
-                <input placeholder="plataformas" value={searchp} onChange={onSearchPlat}/>
-          </ul>
-        {plataforma.map((c) => (<ul key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckP} defaultChecked={palomita2(c)}></input></ul>) )}
-        {envi.platforms.length === 0 && (
-        <p className="danger">es necesario una plataforma</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <ul>
+//           <h3>PLATAFORMAS</h3>
+//                 <input placeholder="plataformas" value={searchp} onChange={onSearchPlat}/>
+//           </ul>
+//         {plataforma.map((c) => (<ul key={c+"a"}><li key={c+"b"}>{c}</li><input type="checkbox" key={c} name={c} value={c} onChange={handleInputCheckP} defaultChecked={palomita2(c)}></input></ul>) )}
+//         {envi.platforms.length === 0 && (
+//         <p className="danger">es necesario una plataforma</p>
+//       )}
+//       </div>
       
-      <div className='celdas'>
-        <h3>RATING</h3>
-        <input type="range" name='rating' min="0" max="5" onChange={handleInputChange}></input>
-        {envi.rating === "" && (
-        <p className="danger">es necesario un rating</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <h3>RATING</h3>
+//         <input type="range" name='rating' min="0" max="5" onChange={handleInputChange}></input>
+//         {envi.rating === "" && (
+//         <p className="danger">es necesario un rating</p>
+//       )}
+//       </div>
 
-      <div className='celdas'>
-        <h3>FECHA DE LANZAMIENTO</h3>
-        <input type="date" name = "released" onChange={handleInputChange}></input>
-        {envi.released === "" && (
-        <p className="danger">es necesario una fecha de lanzamiento</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <h3>FECHA DE LANZAMIENTO</h3>
+//         <input type="date" name = "released" onChange={handleInputChange}></input>
+//         {envi.released === "" && (
+//         <p className="danger">es necesario una fecha de lanzamiento</p>
+//       )}
+//       </div>
 
-      <div className='celdas'>
-        <h3>IMAGEN</h3>
-        <input type="text" name="image" id="image" placeholder='image' onChange={handleInputChange} value={input.image}></input>
-        {errors.image && (
-        <p className="danger">{errors.image}</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <h3>IMAGEN</h3>
+//         <input type="text" name="image" id="image" placeholder='image' onChange={handleInputChange} value={input.image}></input>
+//         {errors.image && (
+//         <p className="danger">{errors.image}</p>
+//       )}
+//       </div>
 
 
-      <div className='celdas'>
-        <h3>DESCRIPCION</h3>
-        <textarea type="text" name="description" id="description" placeholder='description' onChange={handleInputChange} value={input.description}></textarea>
-        {errors.description && (
-        <p className="danger">{errors.description}</p>
-      )}
-      </div>
+//       <div className='celdas'>
+//         <h3>DESCRIPCION</h3>
+//         <textarea type="text" name="description" id="description" placeholder='description' onChange={handleInputChange} value={input.description}></textarea>
+//         {errors.description && (
+//         <p className="danger">{errors.description}</p>
+//       )}
+//       </div>
           
 
 
         
       
-      <input type="submit" name ="submit" disabled = {!habilitar(envi,errors) }/>
-  </form>
-  )
+//       <input type="submit" name ="submit" disabled = {!habilitar(envi,errors) }/>
+//   </form>
+//   )
+
+
+
+
+
+
+
 
 
 
