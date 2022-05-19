@@ -96,7 +96,7 @@ export default function GamesDetail() {
                <div className="details">
                   <div className="title1">{gameDetail.name}</div>
                   <div className="title2">{genres}</div>
-                  <p className="ratingg">{estrellas.map(c => <Estrella key={c} det={c}/> )}{rat.slice(2) > 38 && rat.slice(2) < 63? <img className="ico2" src="../estrella12.png" alt="" />: rat.slice(2) < 38?<img className="ico2" src="../estrella14.png" alt="" />: <img className="ico2" src="../estrella34.png" alt="" />}</p>
+                  <p className="ratingg">{estrellas.map(c => <Estrella key={c} det={c}/> )}{rat.slice(2) > 38 && rat.slice(2) < 63? <img className="ico2" src="http://localhost:3000/estrella12.png" alt="" />: rat.slice(2) < 38?<img className="ico2" src="http://localhost:3000/estrella14.png" alt="" />: <img className="ico2" src="http://localhost:3000/estrella34.png" alt="" />}</p>
 
 
                </div>

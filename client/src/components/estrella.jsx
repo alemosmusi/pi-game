@@ -5,10 +5,10 @@ import './contenedor.css'
 
 
 export default function Estrella({det}) {
-  var lugar = "estrella.png"
+  var lugar = "http://localhost:3000/estrella.png"
   var ico = "ico"
   if(det){
-    lugar = "../estrella.png"
+    lugar = "http://localhost:3000/estrella.png"
     ico = "ico2"
   }
 

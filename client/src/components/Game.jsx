@@ -52,7 +52,7 @@ export default function Game ({id, name, image, rating, platforms, genres,create
       <div className="game" >
               <img className="image" src={image} alt="" />
          
-          <Link  className="card-title" to={`/game/${id}`}>
+          <Link  className="card-title" to={`/home/game/${id}`}>
             {name}
           </Link>
           <button className="X" onClick={eliminar}>{created}</button>
@@ -64,7 +64,7 @@ export default function Game ({id, name, image, rating, platforms, genres,create
   }
 
     return (
-      <Link className="game" to={`/game/${id}`}>
+      <Link className="game" to={`/home/game/${id}`}>
         {/* <div className="imagegame"> */}
               <img className="image" src={image} alt="" />
             {/* </div> */}

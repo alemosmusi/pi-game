@@ -297,7 +297,7 @@ const asdf = input.rating
 if(gameCreated.id){
   return(
     
-      <Link to={`/game/${gameCreated.id}`} >
+      <Link to={`/home/game/${gameCreated.id}`} >
             <button className="botoncreado">se creo el juego {gameCreated.name} anda a verlo</button>
     </Link>
     

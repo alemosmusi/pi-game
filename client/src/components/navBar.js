@@ -24,9 +24,9 @@ export default function NavBar(){
         <div className="container">
             <div className="navbar">
                 <ul>
-                    <li><Link to='/'>HOME</Link></li>
-                    <li className="der"><Link to='/creategame'>CREAR JUEGO</Link></li>
-                    <li className="der"><Link to='/gamescreated'>JUEGOS CREADOS</Link></li>
+                    <li><Link to='/home'>HOME</Link></li>
+                    <li className="der"><Link to='/home/creategame'>CREAR JUEGO</Link></li>
+                    <li className="der"><Link to='/home/gamescreated'>JUEGOS CREADOS</Link></li>
                 </ul>
             </div>
             {/* <button className="botonh homeb"><Link to='/'>HOME</Link></button>

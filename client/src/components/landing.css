@@ -1,0 +1,28 @@
+video{
+    width: 100%;
+}
+
+.entrada{
+    overflow: hidden;
+    margin: 10px 10px 10px 10px;
+    border-radius: 20px;
+    box-shadow: 5px 8px 12px black;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    text-decoration: none;
+    padding: 20px;
+    font-family: "spectral";
+    font-size: xx-large;
+    color: blue;
+    
+    
+}
+
+.entrada:hover{
+    transform: scale(1.5);
+    
+    box-shadow: 13px 15px 37px black;
+}
