@@ -288,13 +288,16 @@ const asdf = input.rating
     
     }, [asdf])
 
+const alnuevo = ()=>{
+  gameCreated.id = null
+}
 
 
 
 
 
-
-if(gameCreated.id){
+// if(gameCreated.id){
+  if(false){
   return(
     
       <Link to={`/home/game/${gameCreated.id}`} >
@@ -421,6 +424,11 @@ if(gameCreated.id){
          </form>
       </div>
 
+
+    {gameCreated.id?<Link to={`/home/game/${gameCreated.id}`} onClick={alnuevo}>
+            <button className="botoncreado">se creo el juego {gameCreated.name} anda a verlo</button>
+    </Link>:""}
+      
 
 
 

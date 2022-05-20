@@ -10,21 +10,66 @@
 
 .btnsp{
   
-    list-style: none;
+    /* list-style: none;
     display: inline-block;
     margin: 5px;
     font-size: 50px;
     width: 70px;
-    border-radius: 100%;
+    border-radius: 100%; */
+
+   
+
+
+    background-color: black;
+  font-size: 30pt;
+  font-family: 'Press Start 2p';
+
+    text-shadow: 1px 1px pink, -1px -1px maroon;
+
+	line-height: 1.5em;
+	text-align: center;
+	display: inline-block;
+	width: 1.5em;
+	-webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+		border-radius: .75em;
+	background-color: red;
+	-webkit-box-shadow:  0 .2em maroon;
+	-moz-box-shadow:  0 .2em maroon;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em maroon;
+	color: rgb(131, 128, 128);
+	margin: 5px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	cursor: pointer;
+  padding-left: 5px;
+  border-color: rgba(240, 248, 255, 0.479);
+
+
+
     
       }
 
   .btnsp:hover{
-    background-color: rgb(148, 160, 188);
+    /* background-color: rgb(148, 160, 188);
     border-top: 3px solid rgb(14, 31, 39);;
     border-left: 3px solid rgb(14, 31, 39);;
     border-bottom: 3px solid rgb(39, 85, 108);
-    border-right: 3px solid rgb(39, 85, 108);
+    border-right: 3px solid rgb(39, 85, 108); */
+
+
+    box-shadow: none;
+	position: relative;
+	top: .2em;
+
+
+
+
   }
 
   .cargando{

@@ -133,7 +133,7 @@ router.get('/', async (req,res)=>{
     )
     // juegosApi = juegosApi.concat(creategame)
     let allVideogames = [...creategame, ...filterCharacters];
-    res.json(allVideogames);
+    res.status(200).json(allVideogames);
   } catch (error) {
     res.status(400).json({error:error})
     

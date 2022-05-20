@@ -1,11 +1,11 @@
-const getAllGenres = async (req, res, next) => {
+const crearGenres = async (req, res, next) => {
     //Incluir videojuegos asociados?
-    
-      Genres.create({
-            id: 3,
-            name: "aksfj"
-          })
+    Genres.create({
+          id: 7,
+          name: "name", 
+    })
+      
   }
 
 
-module.exports= getAllGenres
+module.exports = crearGenres
