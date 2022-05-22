@@ -4092,7 +4092,7 @@ export function obtenerDetalle(id){
 
 export function eliminarGame(id){
     return function(dispatch){
-        console.log(id)
+        
         return axios.delete(`http://localhost:3001/deletegame?id=${id}`)
         .then((response) => {
             dispatch({

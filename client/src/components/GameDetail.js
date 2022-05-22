@@ -64,18 +64,15 @@ export default function GamesDetail() {
     
   }
   const estrell = function(){
-    console.log("pasaaaa")
     if(rat.slice(2) > 38 && rat.slice(2) < 63 ){
       return "estrella12.png"
     }else if(rat.slice(2) < 38){
-      console.log("pasaaaa")
       return "estrella14.png"
     }else{
       return "estrella34.png"
     }
   }
 
-  console.log(genres);
       
       //destructurar gameDetail por si no existe parametro https://codepen.io/drehimself/pen/azBmdK?editors=1100
 

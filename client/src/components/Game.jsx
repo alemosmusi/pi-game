@@ -1,7 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component,  useState } from 'react';
 import './Game.css';
 import { Link } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Estrella from './estrella';
 import { eliminarGame } from '../redux/actions/gamesAction';
 
