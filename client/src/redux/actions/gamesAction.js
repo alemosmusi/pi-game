@@ -4012,13 +4012,12 @@ const games =
 // }
 export function obtenerGames(){
     return function(dispacth){
-        return fetch('http://localhost:3001/')
-            .then((resp) => resp.json())
+        return axios.get('/')
         
             .then((games) =>{
                 dispacth({
                 type: OBTENER_GAMES,
-                payload: games
+                payload: games.data
             })
     })
     }
@@ -4027,13 +4026,13 @@ export function obtenerGames(){
 
 export function obtenerGamesCreated(){
     return function(dispacth){
-        return fetch('http://localhost:3001/gamescreated')
-            .then((resp) => resp.json())
+        return axios.get('/gamescreated')
+        
         
             .then((games) =>{
                 dispacth({
                 type: OBTENER_GAMES_CREATED,
-                payload: games
+                payload: games.data
             })
     })
     }
@@ -4074,13 +4073,11 @@ export function obtenerDetalle(id){
 
 
     return function(dispacth){
-        return fetch(`http://localhost:3001/videogame/?id=${id}`)
-            .then((resp) => resp.json())
-        
+        return axios.get(`/videogame/?id=${id}`)
             .then((gamedetail) =>{
                 dispacth({
                     type: OBTENER_DETALLE,
-                    payload: gamedetail
+                    payload: gamedetail.data
             })
     })
     }
@@ -4093,7 +4090,7 @@ export function obtenerDetalle(id){
 export function eliminarGame(id){
     return function(dispatch){
         
-        return axios.delete(`http://localhost:3001/deletegame?id=${id}`)
+        return axios.delete(`/deletegame?id=${id}`)
         .then((response) => {
             dispatch({
                 type: ELIMINAR_UN_GAME,
@@ -4114,7 +4111,7 @@ export function createGame(game){
 
   
         return function(dispatch){
-            return axios.post('http://localhost:3001/creategame', game)
+            return axios.post('/creategame', game)
             .then((response) => {
                 dispatch({
                     type: CREATE_GAME,
